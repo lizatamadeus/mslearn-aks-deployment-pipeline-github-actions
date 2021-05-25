@@ -31,10 +31,7 @@ echo "Attaching ACR to AKS..."
 export ACR_USERNAME=az acr credential show -n $ACR_NAME --query "username" -o tsv
 export ACR_PASSWORD=az acr credential show -n $ACR_NAME --query "passwords[0].value" -o tsv
 
-az aks update \
-    --name $AKS_NAME \
-    --resource-group $RESOURCE_GROUP_NAME \
-    --attach-acr $ACR_NAME
+az aks update -n contoso-video -g mslearn-gh-pipelines-lh92 --attach-acr ContosoContainerRegistrylh92
 
 export DNS_NAME=`az aks show -g $RESOURCE_GROUP_NAME -n $AKS_NAME -o tsv --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o tsv`
 
